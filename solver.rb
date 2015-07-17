@@ -20,7 +20,9 @@ class LazerMaaazzeeSolver
     lazer_x, lazer_y, lazer_direction = @player_x, @player_y, @player_direction
     path = []
     loop do
-      path.push [lazer_x, lazer_y, lazer_direction]
+      next_path = [lazer_x, lazer_y, lazer_direction]
+      return '-1' if path.include?(next_path)
+      path.push next_path
       next_x, next_y = case lazer_direction
         when 'N'; [lazer_x, lazer_y-1]
         when 'S'; [lazer_x, lazer_y+1]
