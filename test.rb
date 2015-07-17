@@ -1,4 +1,5 @@
 require 'pathname'
+require 'pry-byebug'
 ROOT = Pathname File.expand_path('..', __FILE__)
 require ROOT + 'solver'
 
@@ -17,11 +18,17 @@ TEST_CASES.freeze
 
 p TEST_CASES
 
-RESULTS = TEST_CASES.map do |testcase, index|
+failed = false
+
+TEST_CASES.each_with_index do |testcase, index|
   next if testcase.nil?
-  solution = LazerMaaazzeeSolver.new(testcase[:puzzle]).solution
+  solver = LazerMaaazzeeSolver.new(testcase[:puzzle])
+  solution = solver.solution
   if solution != testcase[:solution]
-    raise "FAILed to solve test case #{index}"
+    failed = true
+    warn "Test case #{index} failed!"
+    warn "EXPECTED:\n#{solution}\nTO EQUAL:\n#{testcase[:solution]}\n"
   end
 end
 
+exit(failed ? 1 : 0)
