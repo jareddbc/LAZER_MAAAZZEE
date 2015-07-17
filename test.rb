@@ -16,13 +16,11 @@ end
 
 TEST_CASES.freeze
 
-p TEST_CASES
-
 failed = false
 
 TEST_CASES.each_with_index do |testcase, index|
   next if testcase.nil?
-  solver = LazerMaaazzeeSolver.new(testcase[:puzzle])
+  solver = Solver.new(testcase[:puzzle])
   solution = solver.solution
   if solution != testcase[:solution]
     failed = true
