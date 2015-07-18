@@ -103,7 +103,7 @@ class Solver
       @path << @lazer_position
       begin
         @lazer_position = @lazer_position.next
-      rescue Solver::Board::InvalidCellError => error
+      rescue Solver::Board::InvalidCellError
         return @solution = "#{@path.length}\n#{@path.last.x} #{@path.last.y}"
       end
     end
